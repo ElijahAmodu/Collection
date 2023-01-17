@@ -408,5 +408,6 @@ function checkCanyon (t_canyon){
     
     if(isPlummeting == true){
         gameChar_y += 5;
+    
     }
 }
