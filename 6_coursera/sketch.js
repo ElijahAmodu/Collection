@@ -99,10 +99,13 @@ function draw()
     
     
     for(var i = 0; i < collectables.length; i++){
-         //collectable
-        drawCollectable(collectables[i]);
-        //checkCollectable
-        checkCollectable(collectables[i]);
+        if(!collectables[i].isFound){
+             //collectable
+            drawCollectable(collectables[i]);
+            //checkCollectable
+            checkCollectable(collectables[i]);
+        }
+        
     }
        
     for(var i = 0; i < canyons.length; i++){
@@ -364,9 +367,8 @@ function drawTrees (){
         fill(111, 78, 55);
         rect(trees_x[i], treePos_y - 142, 30, 145);
         fill(34, 139, 34);
-        triangle(trees_x[i] + 15,treePos_y - 262, trees_x[i] - 40, treePos_y - 138, trees_x[i] + 70, treePos_y - 138)
+        triangle(trees_x[i] + 15,treePos_y - 262, trees_x[i] - 40, treePos_y - 138, trees_x[i] + 70, treePos_y - 138);
         triangle(trees_x[i] + 15, treePos_y - 200, trees_x[i] - 40, treePos_y - 112, trees_x[i] + 70, treePos_y -112);
-        
     }
 }
 
