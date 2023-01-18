@@ -24,6 +24,8 @@ var cameraPosX;
 var collectables;
 var canyons;
 var game_score;
+var flagpole;
+var lives;
 
 function setup()
 {
@@ -68,7 +70,8 @@ function setup()
 
     game_score = 0;
     
-    
+    flagpole = {isReached: false,  x_pos: 1500 };
+    lives = 3;
     
 }
 
@@ -107,14 +110,18 @@ function draw()
         }
         
     }
+
+    renderFlagpole();
+    checkPlayerDie();
+    
+    
+      
        
     for(var i = 0; i < canyons.length; i++){
        //draw the canyon
        drawCanyon(canyons[i]);
        //checking Canyon condition
        checkCanyon(canyons[i]); 
-      
-
     }
 	
     
@@ -263,6 +270,13 @@ function draw()
      noStroke();
      textSize(30);
      text("score: " + game_score, 30,30);
+
+     fill(255);
+     noStroke();
+     textSize(30);
+     text("lives: " + lives, 30,60);
+
+
         
 
 	///////////INTERACTION CODE//////////
@@ -284,25 +298,30 @@ function draw()
         isFalling = false;
     }
     
+    // gameChar_world_x = gameChar_x - scrollPos;
+    if(flagpole.isReached == false){
+        checkFlagpole();
+    }
+    
 }
 
 
 function keyPressed()
 {
     //moving left
-    if(keyCode == 65) {
+    if(keyCode == 65 || keyCode == 37) {
         isLeft = true;
-        console.log('a key');
+        // console.log('a key');
     }
     
     //moving right
-    if(keyCode == 68) {
+    if(keyCode == 68 || keyCode == 39) {
         isRight = true;
-        console.log('d key');
+        // console.log('d key');
     }
     
     //jumping code
-     if(keyCode == 87) {
+     if(keyCode == 87  || keyCode == 38) {
          gameChar_y -= 100;
          //isFalling = false;
          console.log('w key');
@@ -323,18 +342,18 @@ function keyReleased()
    
 	// if statements to control the animation of the character when
 	// keys are released.
-    if(keyCode == 65) {
+    if(keyCode == 65 || keyCode == 37) {
         isLeft = false;
-        console.log('a key');
+        // console.log('a key');
     }
     
-    if(keyCode == 68) {
+    if(keyCode == 68 || keyCode == 39) {
         isRight = false;
-        console.log('d key');
+        // console.log('d key');
     }
 
-	console.log("keyReleased: " + key);
-	console.log("keyReleased: " + keyCode);
+	// console.log("keyReleased: " + key);
+	// console.log("keyReleased: " + keyCode);
 }
 
 function drawClouds (){
@@ -411,5 +430,37 @@ function checkCanyon (t_canyon){
     if(isPlummeting == true){
         gameChar_y += 5;
     
+    }
+}
+
+function renderFlagpole(){
+    push();
+    strokeWeight(5);
+    stroke(170);
+    line(flagpole.x_pos, floorPos_y, flagpole.x_pos, floorPos_y - 250);
+    noStroke();
+    fill(255, 255, 0);
+    
+
+    if(flagpole.isReached){
+        rect(flagpole.x_pos, floorPos_y - 250, 50, 50);
+    } else{
+        rect(flagpole.x_pos, floorPos_y - 50, 50, 50);
+    }
+
+    pop();
+}
+
+function checkFlagpole(){
+    var d = abs(gameChar_x - flagpole.x_pos);
+    if( d < 15 ){
+        flagpole.isReached = true;
+    }
+    // console.log(d);
+}
+
+function checkPlayerDie(){
+    if(gameChar_y > floorPos_y){
+        lives -= 1;
     }
 }
