@@ -31,47 +31,11 @@ function setup()
 {
 	createCanvas(1024, 576);
 	floorPos_y = height * 3/4;
-	gameChar_x = width/2;
-	gameChar_y = floorPos_y;
-    
-    isLeft = false;
-    isRight = false;
-    isFalling = false;
-    isPlummeting = false;
-    
-//    collectable = {x_pos: 100, y_pos: floorPos_y, size: 50, isFound: false};
-    
-    canyon = {x_pos: 400, width: 410};
-    
-    trees_x = [-400, -200, 200, 600, 750, 1000, 1400 ];
-    treePos_y = floorPos_y;
-    clouds = [{x_pos: 100, y_pos: 70}, 
-              {x_pos: 400, y_pos: 100}, 
-              {x_pos: 800, y_pos: 50},
-             {x_pos: 1100, y_pos: 50}];
-    
-    mountains = [{x_pos: -300, y_pos: 200}, 
-                 {x_pos: 100, y_pos: 200}, 
-                 {x_pos: 700, y_pos: 200},
-                {x_pos: 1300, y_pos: 200},
-                {x_pos: 1900, y_pos: 200}];
-    
-    cameraPosX = 0;
-    collectables = [{x_pos: -400, y_pos: floorPos_y, size: 50, isFound: false},
-                    {x_pos: -200, y_pos: floorPos_y, size: 50, isFound: false},
-                   {x_pos: 200, y_pos: floorPos_y, size: 50, isFound: false}, 
-                    {x_pos: 700, y_pos: floorPos_y, size: 50, isFound: false}, 
-                    {x_pos: 1000, y_pos: floorPos_y, size: 50, isFound: false},
-                   {x_pos: 1300, y_pos: floorPos_y, size: 50, isFound: false}];
-    
-    canyons = [{x_pos: -240, width: -232},
-              {x_pos: 400, width: 410},
-              {x_pos: 1200, width: 1210}];
-
-    game_score = 0;
-    
-    flagpole = {isReached: false,  x_pos: 1500 };
     lives = 3;
+
+
+    startGame();
+    
     
 }
 
@@ -276,6 +240,19 @@ function draw()
      textSize(30);
      text("lives: " + lives, 30,60);
 
+     if(lives < 1){
+        fill(0);
+        textSize(30);
+        text("Game Over Press space bar to continue", width/2 - 250, height/2)
+        return;
+     }
+     if(flagpole.isReached == true){
+        fill(0);
+        textSize(30);
+        text("Level Complete, Press space bar to continue", width/2 - 250, height/2)
+        return;
+     }
+
 
         
 
@@ -452,7 +429,7 @@ function renderFlagpole(){
 }
 
 function checkFlagpole(){
-    var d = abs(gameChar_x - flagpole.x_pos);
+    var d = abs(gameChar_x - flagpole.x_pos); 
     if( d < 15 ){
         flagpole.isReached = true;
     }
@@ -460,7 +437,54 @@ function checkFlagpole(){
 }
 
 function checkPlayerDie(){
-    if(gameChar_y > floorPos_y){
+    if(gameChar_y > floorPos_y && gameChar_y < 450){
         lives -= 1;
+        startGame();
+    } 
+    if( lives == 0){
+        startGame();
+
     }
+}
+
+function startGame(){
+    isLeft = false;
+    isRight = false;
+    isFalling = false;
+    isPlummeting = false;
+    gameChar_x = width/2;
+	gameChar_y = floorPos_y;
+    
+//    collectable = {x_pos: 100, y_pos: floorPos_y, size: 50, isFound: false};
+    
+    canyon = {x_pos: 400, width: 410};
+    
+    trees_x = [-400, -200, 200, 600, 750, 1000, 1400 ];
+    treePos_y = floorPos_y;
+    clouds = [{x_pos: 100, y_pos: 70}, 
+              {x_pos: 400, y_pos: 100}, 
+              {x_pos: 800, y_pos: 50},
+             {x_pos: 1100, y_pos: 50}];
+    
+    mountains = [{x_pos: -300, y_pos: 200}, 
+                 {x_pos: 100, y_pos: 200}, 
+                 {x_pos: 700, y_pos: 200},
+                {x_pos: 1300, y_pos: 200},
+                {x_pos: 1900, y_pos: 200}];
+    
+    cameraPosX = 0;
+    collectables = [{x_pos: -400, y_pos: floorPos_y, size: 50, isFound: false},
+                    {x_pos: -200, y_pos: floorPos_y, size: 50, isFound: false},
+                   {x_pos: 200, y_pos: floorPos_y, size: 50, isFound: false}, 
+                    {x_pos: 700, y_pos: floorPos_y, size: 50, isFound: false}, 
+                    {x_pos: 1000, y_pos: floorPos_y, size: 50, isFound: false},
+                   {x_pos: 1300, y_pos: floorPos_y, size: 50, isFound: false}];
+    
+    canyons = [{x_pos: -240, width: -232},
+              {x_pos: 400, width: 410},
+              {x_pos: 1200, width: 1210}];
+
+    game_score = 0;
+    
+    flagpole = {isReached: false,  x_pos: 1500 };
 }
