@@ -308,7 +308,6 @@ function keyPressed()
     }
     
     
-    
 	//open up the console to see how these work
 	console.log("keyPressed: " + key);
 	console.log("keyPressed: " + keyCode);
