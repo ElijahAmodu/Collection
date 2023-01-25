@@ -47,10 +47,11 @@ function draw()
     cameraPosX += (gameChar_x - cameraPosX) * 0.5; 
     
 	background(100,155,255); //fill the sky blue
-
+    
+    //draw some green ground
 	noStroke();
 	fill(0,155,0);
-	rect(0, floorPos_y, width, height - floorPos_y); //draw some green ground
+	rect(0, floorPos_y, width, height - floorPos_y); 
     
     push();
     translate(-cameraPosX + 400, 0);
