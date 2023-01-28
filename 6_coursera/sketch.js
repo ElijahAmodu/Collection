@@ -29,6 +29,7 @@ var game_score;
 var flagpole;
 var lives;
 
+var themeSong;
 var jumpSound;
 var fallSound;
 var lostSound;
@@ -36,8 +37,10 @@ var winSound;
 var coins;
 
 function preload(){
-    soundFormats('mp3', 'wav');
+    soundFormats('mp3');
     //loading sounds
+    themeSong = loadSound('sound/theme2.mp3');
+    
     jumpSound = loadSound('sound/jump.mp3');
     jumpSound.setVolume(1);
 
@@ -62,14 +65,13 @@ function setup()
 
 
     startGame();
-    
-    
 }
 
 function draw()
 {
 	///////////DRAWING CODE//////////
 
+    
     //Backgroung movement
     cameraPosX += (gameChar_x - cameraPosX) * 0.5; 
     
@@ -91,6 +93,7 @@ function draw()
     
     //trees
     drawTrees();
+
     
     
     for(var i = 0; i < collectables.length; i++){
@@ -271,13 +274,13 @@ function draw()
      if(lives < 1){
         fill(0);
         textSize(30);
-        text("Game Over Press space bar to continue", width/2 - 250, height/2)
+        text("Game Over, Refresh to continue", width/2 - 250, height/2)
         return;
      }
      if(flagpole.isReached == true){
         fill(0);
         textSize(30);
-        text("Level Complete, Press space bar to continue", width/2 - 250, height/2)
+        text("Level Complete, Refresh to continue", width/2 - 250, height/2)
         return;
      }
 
@@ -288,6 +291,7 @@ function draw()
 	//Put conditional statements to move the game character below here
     if(isLeft == true){
         gameChar_x -= 3;
+        
     }
     
     if(isRight == true){
@@ -307,6 +311,12 @@ function draw()
     if(flagpole.isReached == false){
         checkFlagpole();
     }
+
+    //Theme Song
+    // if(keyCode){
+    //     //themeSong.play();
+    //     //loop();
+    // }
     
 }
 
@@ -472,11 +482,11 @@ function checkPlayerDie(){
         startGame();
     } 
     if( lives == 0){
-        // if(gameChar_y ==)
         lostSound.play();
         startGame();
         
     }
+    
 }
 
 function startGame(){
@@ -520,3 +530,5 @@ function startGame(){
     
     flagpole = {isReached: false,  x_pos: 1500 };
 }
+
+
