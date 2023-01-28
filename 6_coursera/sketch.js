@@ -10,6 +10,7 @@ Game interaction
 var gameChar_x;
 var gameChar_y;
 var floorPos_y;
+
 var isLeft;
 var isRight;
 var isFalling;
@@ -23,9 +24,35 @@ var mountains;
 var cameraPosX;
 var collectables;
 var canyons;
+
 var game_score;
 var flagpole;
 var lives;
+
+var jumpSound;
+var fallSound;
+var lostSound;
+var winSound;
+var coins;
+
+function preload(){
+    soundFormats('mp3', 'wav');
+    //loading sounds
+    jumpSound = loadSound('sound/jump.mp3');
+    jumpSound.setVolume(1);
+
+    fallSound = loadSound('sound/body-fall.mp3');
+    fallSound.setVolume(1);
+
+    lostSound = loadSound('sound/game-over.mp3');
+    lostSound.setVolume(1);
+
+    winSound = loadSound('sound/level-win.mp3');
+    winSound.setVolume(1);
+
+    coins = loadSound('sound/collectible.mp3');
+    coins.setVolume(5);
+}
 
 function setup()
 {
@@ -301,17 +328,17 @@ function keyPressed()
     //jumping code
      if(keyCode == 87  || keyCode == 38) {
          gameChar_y -= 100;
-         //isFalling = false;
-         console.log('w key');
-         if(isPlummeting == true){
-            gameChar_y += 100;
+         jumpSound.play();
+         if( gameChar_y !== floorPos_y ){
+            gameChar_y += 10;
          }
+         console.log('w key');
     }
     
     
 	//open up the console to see how these work
-	console.log("keyPressed: " + key);
-	console.log("keyPressed: " + keyCode);
+	// console.log("keyPressed: " + key);
+	// console.log("keyPressed: " + keyCode);
 }
 
 function keyReleased()
@@ -393,7 +420,8 @@ function drawCanyon (t_canyon){
 function checkCollectable(t_collectable) {
     if(dist(gameChar_x, gameChar_y, t_collectable.x_pos, t_collectable.y_pos) < 2){
         t_collectable.isFound = true;
-        game_score +=  1;
+        coins.play();
+;        game_score +=  1;
         
     }
 }
@@ -432,18 +460,22 @@ function checkFlagpole(){
     var d = abs(gameChar_x - flagpole.x_pos); 
     if( d < 15 ){
         flagpole.isReached = true;
+        winSound.play();
     }
     // console.log(d);
 }
 
 function checkPlayerDie(){
-    if(gameChar_y > floorPos_y && gameChar_y < 450){
+    if(gameChar_y > 576 && gameChar_y < 594){
         lives -= 1;
+        fallSound.play();
         startGame();
     } 
     if( lives == 0){
+        // if(gameChar_y ==)
+        lostSound.play();
         startGame();
-
+        
     }
 }
 
