@@ -36,6 +36,8 @@ var lostSound;
 var winSound;
 var coins;
 
+var platforms
+
 function preload(){
     soundFormats('mp3');
     //loading sounds
@@ -84,17 +86,16 @@ function draw()
     
     push();
     translate(-cameraPosX + 400, 0);
-    
     //clouds
-    drawClouds();   
-    
+    drawClouds();  
     //mountains
     drawMountains();
-    
     //trees
     drawTrees();
 
-    
+    for(var i = 0; i < platforms.length; i++){
+        platforms[i].draw();
+    }
     
     for(var i = 0; i < collectables.length; i++){
         if(!collectables[i].isFound){
@@ -300,8 +301,18 @@ function draw()
    
     //adding gravity
     if(gameChar_y != floorPos_y){
-        gameChar_y += 2;
-        isFalling =  true;
+        var isContact = false;
+        for(var i = 0; i < platforms.length; i++){
+           if(platforms[i].checkContact(gameChar_x, gameChar_y) == true){
+                isContact = true;
+                break;
+           }
+        }
+        if(isContact == false){
+             gameChar_y += 2;
+             isFalling =  true;
+        }
+       
      } 
     else {
         isFalling = false;
@@ -526,9 +537,33 @@ function startGame(){
               {x_pos: 400, width: 410},
               {x_pos: 1200, width: 1210}];
 
+    platforms =  [];
+    platforms.push(createPlatforms(100, floorPos_y - 90, 100));
+    platforms.push(createPlatforms(1100, floorPos_y - 90, 100));
+
     game_score = 0;
     
     flagpole = {isReached: false,  x_pos: 1500 };
 }
 
-
+function createPlatforms(x, y, length){
+    var p = {
+        x: x,
+        y: y,
+        length: length,
+        draw: function(){
+            fill(50);
+            rect(this.x, this.y, this.length, 20, 30)
+        },
+        checkContact:function(gc_x,  gc_y){
+            if(gc_x > this.x && gc_x < this.x + this.length){
+                var d = this.y - gc_y;
+                if(d >= 0 && d < 5){
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
+    return p;
+}
