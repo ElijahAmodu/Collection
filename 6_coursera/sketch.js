@@ -36,7 +36,8 @@ var lostSound;
 var winSound;
 var coins;
 
-var platforms
+var platforms;
+var enemies;
 
 function preload(){
     soundFormats('mp3');
@@ -118,6 +119,19 @@ function draw()
        drawCanyon(canyons[i]);
        //checking Canyon condition
        checkCanyon(canyons[i]); 
+    }
+
+    for(var i = 0; i < enemies.length; i++){
+        enemies[i].draw();
+        var isContact = enemies[i].checkContact(gameChar_x, gameChar_y);
+
+        if(isContact){
+            if(lives > 0){
+                startGame();
+                break;
+            }
+        }
+        
     }
 	
     
@@ -320,7 +334,7 @@ function draw()
     
     // gameChar_world_x = gameChar_x - scrollPos;
     if(flagpole.isReached == false){
-        checkFlagpole();
+        checkFlagpole(flagpole);
     }
 
     //Theme Song
@@ -544,6 +558,9 @@ function startGame(){
     game_score = 0;
     
     flagpole = {isReached: false,  x_pos: 1500 };
+
+    enemies = [];
+    enemies.push(new Enemy(100, floorPos_y - 10, 100));
 }
 
 function createPlatforms(x, y, length){
@@ -566,4 +583,39 @@ function createPlatforms(x, y, length){
         }
     }
     return p;
+}
+
+function Enemy(x, y, range){
+    this.x = x;
+    this.y = y;
+    this.range = range;
+
+    this.currentX = x;
+    this.inc = 1;
+
+    this.update = function (){
+        this.currentX += this.inc;
+
+        if(this.currentX >= this.x + this.range){
+            this.inc = -1;
+        } else if (this.currentX < this.x){
+            this.inc = 1;
+        }
+    }
+
+    this.draw = function(){
+        this.update()
+        fill(255, 0, 0);
+        ellipse(this.currentX, this.y, 20, 20);
+    }
+    
+    this.checkContact = function(gc_x, gc_y){
+        var d = dist(gc_x, gc_y, this.currentX, this.y);
+        //console.log(d);
+        if(d < 20){
+            return true;
+        }
+
+        return false;
+    }
 }
