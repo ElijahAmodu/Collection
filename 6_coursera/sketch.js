@@ -1,12 +1,3 @@
-/*
-
-The Game Project 5
-
-Game interaction
-
-*/
-
-
 var gameChar_x;
 var gameChar_y;
 var floorPos_y;
@@ -41,7 +32,7 @@ var platforms;
 var enemies;
 
 function preload(){
-    soundFormats('mp3', 'wav');
+    //soundFormats('mp3', 'wav');
     //loading sounds
     themeSong = loadSound('sound/theme2.mp3');
     
@@ -74,10 +65,7 @@ function setup()
 }
 
 function draw()
-{
-	///////////DRAWING CODE//////////
-
-    
+{ 
     //Backgroung movement
     cameraPosX += (gameChar_x - cameraPosX) * 0.5; 
     
@@ -131,6 +119,7 @@ function draw()
         if(isContact){
             if(lives > 0){
                 hitSound.play();
+                lives -= 1;
                 startGame();
                 break;
             }
@@ -165,7 +154,6 @@ function draw()
 	}
 	else if(isRight && isFalling)
 	{
-//        noStroke();
           strokeWeight(1);
 		// add your jumping-right code
         fill(193, 154, 107);
@@ -307,7 +295,7 @@ function draw()
         
 
 	///////////INTERACTION CODE//////////
-	//Put conditional statements to move the game character below here
+	//Conditional statements to move the game character below here
     if(isLeft == true){
         gameChar_x -= 3;
         
@@ -336,7 +324,6 @@ function draw()
         isFalling = false;
     }
     
-    // gameChar_world_x = gameChar_x - scrollPos;
     if(flagpole.isReached == false){
         checkFlagpole(flagpole);
     }
@@ -355,13 +342,11 @@ function keyPressed()
     //moving left
     if(keyCode == 65 || keyCode == 37) {
         isLeft = true;
-        // console.log('a key');
     }
     
     //moving right
     if(keyCode == 68 || keyCode == 39) {
         isRight = true;
-        // console.log('d key');
     }
     
     //jumping code
@@ -371,32 +356,21 @@ function keyPressed()
          if( gameChar_y !== floorPos_y ){
             gameChar_y += 10;
          }
-         console.log('w key');
     }
-    
-    
-	//open up the console to see how these work
-	// console.log("keyPressed: " + key);
-	// console.log("keyPressed: " + keyCode);
 }
 
 function keyReleased()
 {
    
 	//the animation of the character when
-	// keys are released.
     if(keyCode == 65 || keyCode == 37) {
         isLeft = false;
-        // console.log('a key');
     }
     
     if(keyCode == 68 || keyCode == 39) {
         isRight = false;
-        // console.log('d key');
     }
 
-	// console.log("keyReleased: " + key);
-	// console.log("keyReleased: " + keyCode);
 }
 
 function drawClouds (){
@@ -449,7 +423,8 @@ function drawCollectable (t_collectable){
 function drawCanyon (t_canyon){
     strokeWeight(50);
     stroke(176,224,230)
-    line(t_canyon.x_pos + 8, 455 ,t_canyon.width, 576);
+    rect(t_canyon.x_pos, 458 ,15, 100);
+   // line(t_canyon.x_pos + 8, 455 ,t_canyon.width, 576);
     strokeWeight(14);
     stroke(111, 78, 55);
     line(t_canyon.x_pos - 22, 438, t_canyon.width - 30, 576);
@@ -526,9 +501,8 @@ function startGame(){
     gameChar_x = width/2;
 	gameChar_y = floorPos_y;
     
-//    collectable = {x_pos: 100, y_pos: floorPos_y, size: 50, isFound: false};
     
-    canyon = {x_pos: 400, width: 410};
+    //canyon = {x_pos: 400, width: 410};
     
     trees_x = [-400, -200, 200, 600, 750, 1000, 1400 ];
     treePos_y = floorPos_y;
