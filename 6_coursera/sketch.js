@@ -35,12 +35,13 @@ var fallSound;
 var lostSound;
 var winSound;
 var coins;
+var hitSound;
 
 var platforms;
 var enemies;
 
 function preload(){
-    soundFormats('mp3');
+    soundFormats('mp3', 'wav');
     //loading sounds
     themeSong = loadSound('sound/theme2.mp3');
     
@@ -58,6 +59,8 @@ function preload(){
 
     coins = loadSound('sound/collectible.mp3');
     coins.setVolume(5);
+
+    hitSound = loadSound('sound/hitSound.wav');
 }
 
 function setup()
@@ -127,6 +130,7 @@ function draw()
 
         if(isContact){
             if(lives > 0){
+                hitSound.play();
                 startGame();
                 break;
             }
@@ -379,7 +383,7 @@ function keyPressed()
 function keyReleased()
 {
    
-	// if statements to control the animation of the character when
+	//the animation of the character when
 	// keys are released.
     if(keyCode == 65 || keyCode == 37) {
         isLeft = false;
@@ -554,6 +558,7 @@ function startGame(){
     platforms =  [];
     platforms.push(createPlatforms(100, floorPos_y - 90, 100));
     platforms.push(createPlatforms(1100, floorPos_y - 90, 100));
+    platforms.push(createPlatforms(700, floorPos_y - 90, 100));
 
     game_score = 0;
     
@@ -561,6 +566,8 @@ function startGame(){
 
     enemies = [];
     enemies.push(new Enemy(100, floorPos_y - 10, 100));
+    enemies.push(new Enemy(700, floorPos_y - 10, 100));
+    enemies.push(new Enemy(1100, floorPos_y - 10, 100));
 }
 
 function createPlatforms(x, y, length){
