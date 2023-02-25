@@ -414,12 +414,12 @@ function drawMountains() {
     for(var i=0; i < mountains.length; i++){
         noStroke();
         fill(113, 121,126);
-        triangle(mountains[i].x_pos + 280, mountains[i].y_pos -20, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 480, mountains[i].y_pos + 232);
+        triangle(mountains[i].x_pos + 280, mountains[i].y_pos -100, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 480, mountains[i].y_pos + 232);
         fill(255,255,255);
-        triangle(mountains[i].x_pos + 280, mountains[i].y_pos +20, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 350, mountains[i].y_pos + 232);
+        triangle(mountains[i].x_pos + 280, mountains[i].y_pos -100, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 350, mountains[i].y_pos + 232);
         fill(113, 121,126);
-        triangle(mountains[i].x_pos + 200, mountains[i].y_pos +20, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 350, mountains[i].y_pos + 232);
-        triangle(mountains[i].x_pos + 400, mountains[i].y_pos +30, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 500, mountains[i].y_pos + 232);
+        triangle(mountains[i].x_pos + 200, mountains[i].y_pos - 45, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 350, mountains[i].y_pos + 232);
+        triangle(mountains[i].x_pos + 400, mountains[i].y_pos - 50, mountains[i].x_pos + 100, mountains[i].y_pos + 232, mountains[i].x_pos + 500, mountains[i].y_pos + 232);
     }
 }
 
@@ -532,10 +532,14 @@ function startGame(){
     
     trees_x = [-400, -200, 200, 600, 750, 1000, 1400 ];
     treePos_y = floorPos_y;
-    clouds = [{x_pos: 100, y_pos: 70}, 
-              {x_pos: 400, y_pos: 100}, 
-              {x_pos: 800, y_pos: 50},
-             {x_pos: 1100, y_pos: 50}];
+    clouds = [{x_pos: -300, y_pos: 70},
+             {x_pos: -100, y_pos: 100},
+             {x_pos: 100, y_pos: 70}, 
+             {x_pos: 400, y_pos: 100}, 
+             {x_pos: 800, y_pos: 50},
+             {x_pos: 1100, y_pos: 50},
+             {x_pos: 1500, y_pos: 100},
+             {x_pos: 1800, y_pos: 50}];
     
     mountains = [{x_pos: -300, y_pos: 200}, 
                  {x_pos: 100, y_pos: 200}, 
