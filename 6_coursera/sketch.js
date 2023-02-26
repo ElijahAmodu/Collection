@@ -145,6 +145,7 @@ function draw()
         rect(gameChar_x - 8, gameChar_y - 47, 15, 15);
         //hand
         stroke(15);
+        strokeWeight(5);
         line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 25, gameChar_y - 60);
         line(gameChar_x + 10, gameChar_y -45, gameChar_x + 25, gameChar_y - 60);
         //leg
@@ -167,6 +168,7 @@ function draw()
         rect(gameChar_x - 8, gameChar_y - 47, 15, 15);
         //hand
         stroke(15);
+        strokeWeight(5);
         line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 25, gameChar_y - 60);
         line(gameChar_x + 10, gameChar_y -45, gameChar_x + 25, gameChar_y - 60);
         //leg
@@ -190,6 +192,7 @@ function draw()
         rect(gameChar_x - 8, gameChar_y - 47, 15, 25);
         //hand
         stroke(15);
+        strokeWeight(5);
         line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 25, gameChar_y - 20);
         line(gameChar_x + 8, gameChar_y -45, gameChar_x + 25, gameChar_y - 15);
         //leg
@@ -212,6 +215,7 @@ function draw()
         rect(gameChar_x - 8, gameChar_y - 47, 15, 25);
         //hand
         stroke(15);
+        strokeWeight(5);
         line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 25, gameChar_y - 20);
         line(gameChar_x + 8, gameChar_y -45, gameChar_x + 25, gameChar_y - 15);
         //leg
@@ -229,18 +233,20 @@ function draw()
         fill(0);
         ellipse(gameChar_x - 8,gameChar_y - 65,5,5);
         ellipse(gameChar_x + 7,gameChar_y - 65,5,5);
-        ellipse(gameChar_x, gameChar_y - 55, 15,5)
+        ellipse(gameChar_x, gameChar_y - 55, 15,5);
         //body
         fill(0, 0, 255);
-        rect(gameChar_x - 10, gameChar_y - 47, 20, 15);
+        rect(gameChar_x - 10, gameChar_y - 47, 20, 28);
         //hand
         stroke(15);
+        strokeWeight(5);
         line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 25, gameChar_y - 60);
         line(gameChar_x + 10, gameChar_y -45, gameChar_x + 25, gameChar_y - 60);
         //leg
+        noStroke();
         fill(0)
-        rect(gameChar_x - 9, gameChar_y - 35, 5, 15);
-        rect(gameChar_x + 5, gameChar_y - 35 , 5, 15);
+        rect(gameChar_x - 10, gameChar_y - 20, 5, 25);
+        rect(gameChar_x + 5, gameChar_y - 20 , 5, 25);
 
 	}
 	else
@@ -248,21 +254,24 @@ function draw()
         strokeWeight(1);
 		// add your standing front facing code
         fill(193, 154, 107);
-        ellipse(gameChar_x,gameChar_y - 60,30,30);
+        ellipse(gameChar_x,gameChar_y - 60,28,30);
         //eyes
         fill(0);
         ellipse(gameChar_x - 8,gameChar_y - 65,5,5);
         ellipse(gameChar_x + 7,gameChar_y - 65,5,5);
-        ellipse(gameChar_x, gameChar_y - 55, 15,5)
+        ellipse(gameChar_x, gameChar_y - 55, 15,5);
+        //body
         fill(0, 0, 255);
         rect(gameChar_x - 10, gameChar_y - 47, 20, 25)
         //hand
         stroke(15);
-        line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 25, gameChar_y - 30);
-        line(gameChar_x + 10, gameChar_y -45, gameChar_x + 25, gameChar_y - 30);
+        strokeWeight(5);
+        line(gameChar_x - 10, gameChar_y - 45, gameChar_x - 15, gameChar_y - 30);
+        line(gameChar_x + 10, gameChar_y -45, gameChar_x + 15, gameChar_y - 30);
         //leg
+        noStroke();
         fill(0)
-        rect(gameChar_x - 9, gameChar_y - 25, 5, 25);
+        rect(gameChar_x - 10, gameChar_y - 25, 5, 25);
         rect(gameChar_x + 5, gameChar_y - 25 , 5, 25);
 	}
     
