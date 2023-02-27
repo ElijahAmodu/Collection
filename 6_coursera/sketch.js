@@ -360,8 +360,11 @@ function keyPressed()
     
     //jumping code
      if(keyCode == 87  || keyCode == 38) {
-         gameChar_y -= 100;
-         jumpSound.play();
+        if(gameChar_y == floorPos_y){
+            gameChar_y -= 100;
+            jumpSound.play();
+        }
+         
          if( gameChar_y !== floorPos_y ){
             gameChar_y += 10;
          }
@@ -543,9 +546,9 @@ function startGame(){
               {x_pos: 1200, width: 1210}];
 
     platforms =  [];
-    platforms.push(createPlatforms(100, floorPos_y - 90, 100));
-    platforms.push(createPlatforms(1100, floorPos_y - 90, 100));
-    platforms.push(createPlatforms(700, floorPos_y - 90, 100));
+    platforms.push(createPlatforms(60, floorPos_y - 90, 100));
+    platforms.push(createPlatforms(1000, floorPos_y - 90, 100));
+    platforms.push(createPlatforms(600, floorPos_y - 90, 100));
 
     game_score = 0;
     
