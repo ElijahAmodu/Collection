@@ -488,7 +488,7 @@ function checkFlagpole(){
         flagpole.isReached = true;
         winSound.play();
     }
-    // console.log(d);
+    // console.log(d);yy
 }
 
 function checkPlayerDie(){
