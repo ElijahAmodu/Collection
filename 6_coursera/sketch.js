@@ -32,9 +32,10 @@ var platforms;
 var enemies;
 
 function preload(){
-    //soundFormats('mp3', 'wav');
+    soundFormats('mp3', 'wav');
     //loading sounds
     themeSong = loadSound('sound/theme2.mp3');
+    themeSong.setVolume(0.2);
     
     jumpSound = loadSound('sound/jump.mp3');
     jumpSound.setVolume(1);
@@ -52,6 +53,7 @@ function preload(){
     coins.setVolume(5);
 
     hitSound = loadSound('sound/hitSound.wav');
+    hitSound.setVolume(1);
 }
 
 function setup()
@@ -336,18 +338,19 @@ function draw()
     if(flagpole.isReached == false){
         checkFlagpole(flagpole);
     }
-
-    //Theme Song
-    // if(keyCode){
-    //     //themeSong.play();
-    //     //loop();
-    // }
     
 }
 
 
 function keyPressed()
 {
+    //moving sound
+    if(keyCode == 83){
+        themeSong.play();
+        loop();
+    }
+    
+
     //moving left
     if(keyCode == 65 || keyCode == 37) {
         isLeft = true;
@@ -487,6 +490,7 @@ function checkFlagpole(){
     if( d < 15 ){
         flagpole.isReached = true;
         winSound.play();
+        themeSong.pause()
     }
     // console.log(d);yy
 }
