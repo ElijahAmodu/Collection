@@ -71,7 +71,7 @@ function draw()
     //Backgroung movement
     cameraPosX += (gameChar_x - cameraPosX) * 0.5; 
     
-	background(100,155,255); //fill the sky blue
+	background(100,155,255); //Skye color
     
     //draw some green ground
 	noStroke();
@@ -97,15 +97,12 @@ function draw()
             drawCollectable(collectables[i]);
             //checkCollectable
             checkCollectable(collectables[i]);
-        }
-        
+        } 
     }
 
     renderFlagpole();
     checkPlayerDie();
-    
-    
-      
+
        
     for(var i = 0; i < canyons.length; i++){
        //draw the canyon
@@ -126,7 +123,6 @@ function draw()
                 break;
             }
         }
-        
     }
 	
     
@@ -300,13 +296,10 @@ function draw()
         textSize(30);
         text("Level Complete, Refresh to continue", width/2 - 250, height/2)
         return;
-     }
-
-
-        
+     }    
 
 	///////////INTERACTION CODE//////////
-	//Conditional statements to move the game character below here
+	//Conditional statements to move the game character below 
     if(isLeft == true){
         gameChar_x -= 3;
         
@@ -329,7 +322,6 @@ function draw()
              gameChar_y += 2;
              isFalling =  true;
         }
-       
      } 
     else {
         isFalling = false;
@@ -338,7 +330,6 @@ function draw()
     if(flagpole.isReached == false){
         checkFlagpole(flagpole);
     }
-    
 }
 
 
@@ -347,9 +338,8 @@ function keyPressed()
     //moving sound
     if(keyCode == 83){
         themeSong.play();
-        loop();
+        
     }
-    
 
     //moving left
     if(keyCode == 65 || keyCode == 37) {
@@ -420,6 +410,7 @@ function drawTrees (){
         fill(34, 139, 34);
         triangle(trees_x[i] + 15,treePos_y - 262, trees_x[i] - 40, treePos_y - 138, trees_x[i] + 70, treePos_y - 138);
         triangle(trees_x[i] + 15, treePos_y - 200, trees_x[i] - 40, treePos_y - 112, trees_x[i] + 70, treePos_y -112);
+        triangle(trees_x[i] + 15, treePos_y - 320, trees_x[i] - 40, treePos_y - 168, trees_x[i] + 70, treePos_y -168);
     }
 }
 
@@ -427,7 +418,6 @@ function drawCollectable (t_collectable){
      
     
     if(t_collectable.isFound == false){
-        //strokeWeight(40);
         fill(255,215,0);
         ellipse(t_collectable.x_pos ,t_collectable.y_pos, 20, 20);
         
@@ -439,7 +429,6 @@ function drawCanyon (t_canyon){
     strokeWeight(50);
     stroke(176,224,230)
     rect(t_canyon.x_pos, 458 ,15, 100);
-   // line(t_canyon.x_pos + 8, 455 ,t_canyon.width, 576);
     strokeWeight(14);
     stroke(111, 78, 55);
     line(t_canyon.x_pos - 22, 438, t_canyon.width - 30, 576);
@@ -450,8 +439,7 @@ function checkCollectable(t_collectable) {
     if(dist(gameChar_x, gameChar_y, t_collectable.x_pos, t_collectable.y_pos) < 2){
         t_collectable.isFound = true;
         coins.play();
-;        game_score +=  1;
-        
+        game_score +=  1;
     }
 }
 
@@ -492,7 +480,6 @@ function checkFlagpole(){
         winSound.play();
         themeSong.pause()
     }
-    // console.log(d);yy
 }
 
 function checkPlayerDie(){
@@ -504,9 +491,7 @@ function checkPlayerDie(){
     if( lives == 0){
         lostSound.play();
         startGame();
-        
     }
-    
 }
 
 function startGame(){
@@ -517,8 +502,6 @@ function startGame(){
     gameChar_x = width/2;
 	gameChar_y = floorPos_y;
     
-    
-    //canyon = {x_pos: 400, width: 410};
     
     trees_x = [-400, -200, 200, 600, 750, 1000, 1400 ];
     treePos_y = floorPos_y;
@@ -562,6 +545,7 @@ function startGame(){
     enemies.push(new Enemy(100, floorPos_y - 10, 100));
     enemies.push(new Enemy(700, floorPos_y - 10, 100));
     enemies.push(new Enemy(1100, floorPos_y - 10, 100));
+
 }
 
 function createPlatforms(x, y, length){
@@ -612,7 +596,6 @@ function Enemy(x, y, range){
     
     this.checkContact = function(gc_x, gc_y){
         var d = dist(gc_x, gc_y, this.currentX, this.y);
-        //console.log(d);
         if(d < 20){
             return true;
         }
