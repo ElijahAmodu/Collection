@@ -2,10 +2,10 @@ body{
     padding: 0px;
     margin: 0px;
     text-align: center;
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(180, 200, 181);
     display: block;
 }
 
 p{
-    font-size: 20px;
+    font-size: 25px;
 }
