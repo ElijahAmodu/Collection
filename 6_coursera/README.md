@@ -81,24 +81,24 @@ the skills you learnt/practiced in completing the game project
 
 
 Review Criteria
-Base application (25 marks)
+Base application 
 
-Base functionality [6]
+Base functionality 
 
-Code presentation [6]
+Code presentation 
 
-Code competency [6]
+Code competency 
 
-Advanced code techniques bonus [3]
+Advanced code techniques bonus 
 
-Game play, level design and aesthetics [4]
+Game play, level design and aesthetics 
 
-Extension (12 marks)
+Extension 
 
-functionality (4):
+functionality 
 
-creativity (4):
+creativity 
 
-Extensions - ambition (4):
+Extensions - ambition 
 
-Commentary and deliverables (3 marks)
+Commentary and deliverables 
